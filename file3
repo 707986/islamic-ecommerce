@@ -1,0 +1,27 @@
+package com.islamicecommerce.model;
+
+public enum ProductCategory {
+    ISLAMIC_BOOKS("Islamic Books"),
+    HIJAB("Hijab"),
+    ABAYA("Abaya"),
+    ISLAMIC_CAPS("Islamic Caps"),
+    ISLAMIC_GIFTS("Islamic Gifts"),
+    HALAL_PERFUMES("Halal Perfumes"),
+    MEN_DRESS("Men's Dress"),
+    WOMEN_DRESS("Women's Dress"),
+    HOME_DECOR("Home Decor"),
+    KIDS_BOOKS("Kids Books"),
+    PRAYER_MATS("Prayer Mats"),
+    TASBIH("Tasbih"),
+    QURAN_STANDS("Quran Stands");
+
+    private final String displayName;
+
+    ProductCategory(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+}
