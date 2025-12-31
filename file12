@@ -1,0 +1,39 @@
+package com.islamicecommerce.controller;
+
+import com.islamicecommerce.dto.ApiResponse;
+import com.islamicecommerce.dto.ProductDTO;
+import com.islamicecommerce.service.ProductService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/home")
+@RequiredArgsConstructor
+public class HomeController {
+    
+    private final ProductService productService;
+    
+    @GetMapping
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getHomeData() {
+        Map<String, Object> homeData = new HashMap<>();
+        
+        homeData.put("featuredProducts", productService.getFeaturedProducts());
+        homeData.put("categories", productService.getAllCategories());
+        homeData.put("message", "Welcome to Islamic E-commerce API");
+        homeData.put("status", "active");
+        homeData.put("totalCategories", productService.getAllCategories().size());
+        
+        return ResponseEntity.ok(ApiResponse.success(homeData));
+    }
+    
+    @GetMapping("/health")
+    public ResponseEntity<ApiResponse<String>> healthCheck() {
+        return ResponseEntity.ok(ApiResponse.success("Islamic E-commerce API is running!"));
+    }
+}
