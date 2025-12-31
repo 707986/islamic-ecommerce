@@ -1,0 +1,45 @@
+# 🕌 Islamic E-commerce Platform
+
+A complete Spring Boot e-commerce API for Islamic products.
+
+## 🌟 Features
+- RESTful API for Islamic products
+- Product categories: Books, Hijabs, Abayas, Perfumes, etc.
+- H2 Database (in-memory)
+- Swagger API Documentation
+- Ready for deployment on Render/Heroku
+
+## 🚀 Quick Start
+
+### Access the API:
+- Base URL: `https://your-app.onrender.com`
+- Health Check: `GET /api/home/health`
+- All Products: `GET /api/products`
+- Categories: `GET /api/products/categories`
+
+### API Documentation:
+- Swagger UI: `/swagger-ui/`
+- H2 Database Console: `/h2-console`
+
+## 📦 Product Categories
+1. Islamic Books
+2. Hijab
+3. Abaya
+4. Islamic Caps
+5. Islamic Gifts
+6. Halal Perfumes
+7. Men's Dress
+8. Women's Dress
+9. Home Decor
+10. Kids Books
+
+## 🔧 Deployment
+
+Deploy to Render.com in 5 minutes:
+1. Push this code to GitHub
+2. Connect to Render.com
+3. Automatic deployment
+4. Get your public URL
+
+## 📞 Support
+For issues or questions, check the GitHub repository.
