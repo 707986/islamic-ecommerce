@@ -1,0 +1,20 @@
+package com.islamicecommerce.service;
+
+import com.islamicecommerce.dto.ProductDTO;
+import com.islamicecommerce.dto.ProductRequestDTO;
+import com.islamicecommerce.model.ProductCategory;
+
+import java.util.List;
+
+public interface ProductService {
+    ProductDTO createProduct(ProductRequestDTO productRequest);
+    ProductDTO updateProduct(Long id, ProductRequestDTO productRequest);
+    ProductDTO getProductById(Long id);
+    List<ProductDTO> getAllProducts();
+    List<ProductDTO> getProductsByCategory(ProductCategory category);
+    List<ProductDTO> searchProducts(String keyword);
+    void deleteProduct(Long id);
+    void toggleProductStatus(Long id);
+    List<ProductDTO> getFeaturedProducts();
+    List<ProductCategory> getAllCategories();
+}
