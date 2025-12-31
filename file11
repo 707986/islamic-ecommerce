@@ -1,0 +1,92 @@
+package com.islamicecommerce.controller;
+
+import com.islamicecommerce.dto.ApiResponse;
+import com.islamicecommerce.dto.ProductDTO;
+import com.islamicecommerce.dto.ProductRequestDTO;
+import com.islamicecommerce.model.ProductCategory;
+import com.islamicecommerce.service.ProductService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/products")
+@RequiredArgsConstructor
+@Validated
+@CrossOrigin(origins = "*")
+public class ProductController {
+    
+    private final ProductService productService;
+    
+    @PostMapping
+    public ResponseEntity<ApiResponse<ProductDTO>> createProduct(
+            @Valid @RequestBody ProductRequestDTO productRequest) {
+        ProductDTO createdProduct = productService.createProduct(productRequest);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(ApiResponse.success("Product created successfully", createdProduct));
+    }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<ProductDTO>> updateProduct(
+            @PathVariable Long id,
+            @Valid @RequestBody ProductRequestDTO productRequest) {
+        ProductDTO updatedProduct = productService.updateProduct(id, productRequest);
+        return ResponseEntity.ok(ApiResponse.success("Product updated successfully", updatedProduct));
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<ProductDTO>> getProductById(@PathVariable Long id) {
+        ProductDTO product = productService.getProductById(id);
+        return ResponseEntity.ok(ApiResponse.success(product));
+    }
+    
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> getAllProducts() {
+        List<ProductDTO> products = productService.getAllProducts();
+        return ResponseEntity.ok(ApiResponse.success(products));
+    }
+    
+    @GetMapping("/category/{category}")
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> getProductsByCategory(
+            @PathVariable ProductCategory category) {
+        List<ProductDTO> products = productService.getProductsByCategory(category);
+        return ResponseEntity.ok(ApiResponse.success(products));
+    }
+    
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> searchProducts(
+            @RequestParam String keyword) {
+        List<ProductDTO> products = productService.searchProducts(keyword);
+        return ResponseEntity.ok(ApiResponse.success(products));
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.ok(ApiResponse.success("Product deleted successfully", null));
+    }
+    
+    @PatchMapping("/{id}/toggle-status")
+    public ResponseEntity<ApiResponse<Void>> toggleProductStatus(@PathVariable Long id) {
+        productService.toggleProductStatus(id);
+        return ResponseEntity.ok(ApiResponse.success("Product status updated", null));
+    }
+    
+    @GetMapping("/featured")
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> getFeaturedProducts() {
+        List<ProductDTO> products = productService.getFeaturedProducts();
+        return ResponseEntity.ok(ApiResponse.success(products));
+    }
+    
+    @GetMapping("/categories")
+    public ResponseEntity<ApiResponse<List<ProductCategory>>> getAllCategories() {
+        List<ProductCategory> categories = productService.getAllCategories();
+        return ResponseEntity.ok(ApiResponse.success(categories));
+    }
+}
